@@ -43,7 +43,7 @@ jobs:
 
     - uses: azure/appservice-settings@v1
       with:
-        app-name: $AZURE_WEBAPP_NAME
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
         connection-strings-json: '[{"name": "Redis","value": "${{ steps.keyvault.outputs.redisConnectionString }}","type": "Custom","slotSetting": false}]'        
       id: settings
       
