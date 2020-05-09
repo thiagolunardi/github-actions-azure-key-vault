@@ -14,6 +14,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag devsecops:$(date +%s)
+      run: |
+        docker build . --file Dockerfile --tag devsecops:$(date +%s)
+
+    - name: Login Container Registry
+      env: 
+        ACR_SERVER: ${{ secrets.ACR_SERVER }}
+        ACR_USER: ${{ secrets.ACR_USER }}
+        ACR_PASS: ${{ secrets.ACR_PASS }}
+      run: |
+        docker login -u $ACR_USER -p $ACR_PASS $ACR_SERVER
     
