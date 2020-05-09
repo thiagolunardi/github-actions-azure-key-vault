@@ -27,6 +27,6 @@ jobs:
         ACR_USER: ${{ secrets.ACR_USER }}
         ACR_PASS: ${{ secrets.ACR_PASS }}
       run: |
-        docker login --username $ACR_USER -password-stdin $ACR_PASS $ACR_SERVER |
+        docker login --username $ACR_USER --password-stdin $ACR_PASS $ACR_SERVER |
         docker push $ACR_SERVER/devsecops:latest
 
