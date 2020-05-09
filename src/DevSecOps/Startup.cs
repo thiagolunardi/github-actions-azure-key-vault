@@ -14,13 +14,12 @@ using Microsoft.AspNetCore.Http;
 using StackExchange.Redis;
 using Microsoft.Extensions.Logging;
 
+
 namespace DevSecOps
 {
     public class Startup
     {
-        public static ILogger Logger { get; private set; }
         public IConfiguration Configuration { get; }
-        public static string RedisConfiguration { get; private set; }
 
         public Startup(IConfiguration configuration)
             => (Configuration) = (configuration);
@@ -34,9 +33,8 @@ namespace DevSecOps
             services.AddSingleton<WeatherForecastService>();
             services.AddStackExchangeRedisCache(o =>
             {
-                // ConnectionString:Redis
-                RedisConfiguration = Configuration.GetConnectionString("Redis");
-                o.Configuration = RedisConfiguration;
+                // Get ConnectionString:Redis
+                o.Configuration = Configuration.GetConnectionString("Redis");
             });
         }
 
@@ -65,8 +63,7 @@ namespace DevSecOps
                 endpoints.MapFallbackToPage("/_Host");
             });
 
-            var redisConfig =
-            Logger.LogInformation($"Connected to {o.Configuration}");
+            logger.LogWarning($"Connected to {Configuration.GetConnectionString("Redis")}");
         }
     }
 }
