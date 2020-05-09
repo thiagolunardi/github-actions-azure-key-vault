@@ -4,6 +4,9 @@
 ### User Manual Settings ###
 appsettings.*.json
 
+# Tye | https://github.com/dotnet/tye/
+.tye/*
+
 ### DotnetCore ###
 # .NET Core build folders
 /**/bin
