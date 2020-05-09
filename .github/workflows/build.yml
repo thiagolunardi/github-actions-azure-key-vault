@@ -20,15 +20,14 @@ jobs:
         ACR_SERVER: ${{ secrets.ACR_SERVER }}
         ACR_USER: ${{ secrets.ACR_USER }}
         ACR_PASS: ${{ secrets.ACR_PASS }}
-        TAG: $(date +%s)
       run: |
         docker login -u $ACR_USER -p $ACR_PASS $ACR_SERVER
 
     - name: Build the Docker image
       run: |
-        docker build . --file Dockerfile --tag devsecops:$TAG
+        docker build . --file Dockerfile --tag devsecops:latest
 
     - name: Push the Docker image to Container Registry
       run: |
-        docker push devsecops:$TAG
+        docker push devsecops:latest
 
